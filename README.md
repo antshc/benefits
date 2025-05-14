@@ -148,7 +148,7 @@ discuss your choices. We encourage you to focus on creating a logical and functi
 
 ### Business Context
 
-TODO: Add diagram
+![Business context](benefits.drawio.png)
 
 ## Solution Strategy
 
