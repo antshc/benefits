@@ -80,7 +80,13 @@ three tiers, making the solution a conversation starter to show your abilities a
 4. Build and run the project ⚙️
 5. Use the API by Swagger or run integration tests 🧪
 
-# Documentation
+## Manage migrations
+```bash
+dotnet tool install --global dotnet-ef
+dotnet ef migrations add InitialMigration --project Api --startup-project Api -o Data/Migrations
+dotnet ef migrations remove --project Api --startup-project Api
+```
+# System overview
 # Introduction and Goals
 
 This system is designed to manage employee payroll and benefit deductions using a biweekly pay cycle, where employees receive 26 paychecks per year. The platform supports viewing employees and their dependents, and accurately calculates net
@@ -116,7 +122,7 @@ paycheck amounts by applying predefined deduction policies.
 **Need clarification:**
 - Should dependents over 50 years exclusively apply to grandparents for benefits adjustment?
 
-### Non Functional Requirements/Quality Goals:
+### Non Functional Requirements:
 
 - **Accuracy**  
   Ensure precise calculation of paychecks and benefit deductions, adhering strictly to the defined business rules.
@@ -151,6 +157,8 @@ discuss your choices. We encourage you to focus on creating a logical and functi
 ![Business context](benefits.drawio.png)
 
 ## Solution Strategy
+### STR1 **[Maintainability] Containerization with Docker**
+Containerization with Docker is used to host the Web application to ensure consistent behavior across development, testing, and production environments.
 
 ### STR10 **[Maintainability] Architecture Selection Aligned with DDD Principles**
 
@@ -176,7 +184,6 @@ It enables strongly typed, LINQ-based queries and integrates well with the domai
 EF Core also supports migrations, making it easier to evolve the database schema alongside domain changes.
 
 ### STR23 **[Maintainability] Direct Use of DbContext Instead of Repository Abstraction**
-
 The application uses `DbContext` and `DbSet` directly for data access, as they already implement the Repository and Unit of Work patterns.  
 This avoids redundant abstractions, reduces boilerplate code, and leverages EF Core's built-in capabilities such as change tracking, projections, and query composition.  
 Custom repositories may be introduced later if domain-specific logic or decoupling becomes necessary.
