@@ -36,10 +36,12 @@ public class Employee : Entity, IAggregateRoot
     }
 
     // why? The dependent may be easy added from the API POST /employees/{id}/dependents
-    // if we need a Child or Spouse we can try to use polymorphic behavior
+    // Add rules to validate Child dependents are not allowed to be older than the employee.
+    // May we use polymorphic behavior?
     public void AddDependent(Dependent dependent)
     {
         dependent.SetEmployeeId(Id);
+        
         CheckRule(new SingleSpouseOrDomesticPartnerRule(Dependents, dependent));
 
         _dependents.Add(dependent);
