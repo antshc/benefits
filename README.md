@@ -151,6 +151,8 @@ discuss your choices. We encourage you to focus on creating a logical and functi
 ![Business context](benefits.drawio.png)
 
 ## Solution Strategy
+### STR1 **[Maintainability] Containerization with Docker**
+Containerization with Docker is used to host the Web application to ensure consistent behavior across development, testing, and production environments.
 
 ### STR10 **[Maintainability] Architecture Selection Aligned with DDD Principles**
 
@@ -176,7 +178,6 @@ It enables strongly typed, LINQ-based queries and integrates well with the domai
 EF Core also supports migrations, making it easier to evolve the database schema alongside domain changes.
 
 ### STR23 **[Maintainability] Direct Use of DbContext Instead of Repository Abstraction**
-
 The application uses `DbContext` and `DbSet` directly for data access, as they already implement the Repository and Unit of Work patterns.  
 This avoids redundant abstractions, reduces boilerplate code, and leverages EF Core's built-in capabilities such as change tracking, projections, and query composition.  
 Custom repositories may be introduced later if domain-specific logic or decoupling becomes necessary.
