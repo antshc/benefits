@@ -46,7 +46,7 @@ public static class DependencyInjection
     private static void DomainLayer(IServiceCollection services)
     {
         services.AddSingleton<IPaycheckCalculator, PaycheckCalculator>();
-        services.AddSingleton<IDeductionPolicy, DependentAdditionalCostPerMonthForBenefitsDeductionPolicy>();
+        services.AddSingleton<IDeductionPolicy, AdditionalCostPerDependentForBenefitsDeductionPolicy>();
         services.AddSingleton<IDeductionPolicy, BaseCostForBenefitsDeductionPolicy>();
         services.AddSingleton<IDeductionPolicy, SalaryThresholdDeductionPolicy>();
         services.AddSingleton<IDeductionPolicy, DependentAgeOverThresholdDeductionPolicy>();

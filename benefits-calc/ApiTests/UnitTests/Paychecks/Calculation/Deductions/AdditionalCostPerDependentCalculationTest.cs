@@ -21,7 +21,7 @@ public class AdditionalCostPerDependentCalculationTest : DeductionCalculationBas
 
         // Assert
         actual.AssertDeductionAmount("BaseCostForBenefitsDeductionPolicy",  461.54m);
-        actual.AssertDeductionAmount("AdditionalCostPerDependentDeductionPolicy", 0.00m);
+        actual.AssertDeductionAmount("AdditionalCostPerDependentForBenefitsDeductionPolicy", 0.00m);
         actual.AssertPaycheck(
             grossAmount: 3000.00m,
             totalDeductions: 461.54m,
@@ -40,7 +40,7 @@ public class AdditionalCostPerDependentCalculationTest : DeductionCalculationBas
 
         // Assert
         actual.AssertDeductionAmount("BaseCostForBenefitsDeductionPolicy",  461.54m);
-        actual.AssertDeductionAmount("AdditionalCostPerDependentDeductionPolicy", 276.92m);
+        actual.AssertDeductionAmount("AdditionalCostPerDependentForBenefitsDeductionPolicy", 276.92m);
         actual.AssertPaycheck(
             grossAmount: 3000.00m,
             totalDeductions: 738.46m,
@@ -60,7 +60,7 @@ public class AdditionalCostPerDependentCalculationTest : DeductionCalculationBas
 
         // Assert
         actual.AssertDeductionAmount("BaseCostForBenefitsDeductionPolicy",  461.54m);
-        actual.AssertDeductionAmount("AdditionalCostPerDependentDeductionPolicy", 553.85m);
+        actual.AssertDeductionAmount("AdditionalCostPerDependentForBenefitsDeductionPolicy", 553.85m);
         actual.AssertPaycheck(
             grossAmount: 3000.00m,
             totalDeductions: 1015.39m,
@@ -81,7 +81,7 @@ public class AdditionalCostPerDependentCalculationTest : DeductionCalculationBas
 
         // Assert
         actual.AssertDeductionAmount("BaseCostForBenefitsDeductionPolicy",  461.54m);
-        actual.AssertDeductionAmount("AdditionalCostPerDependentDeductionPolicy", 830.77m);
+        actual.AssertDeductionAmount("AdditionalCostPerDependentForBenefitsDeductionPolicy", 830.77m);
         actual.AssertPaycheck(
             grossAmount: 3000.00m,
             totalDeductions: 1292.31m,
@@ -102,7 +102,7 @@ public class AdditionalCostPerDependentCalculationTest : DeductionCalculationBas
 
         // Assert
         actual.AssertDeductionAmount("BaseCostForBenefitsDeductionPolicy",  461.54m);
-        actual.AssertDeductionAmount("AdditionalCostPerDependentDeductionPolicy", 830.77m);
+        actual.AssertDeductionAmount("AdditionalCostPerDependentForBenefitsDeductionPolicy", 830.77m);
         actual.AssertPaycheck(
             grossAmount: 3000.00m,
             totalDeductions: 1292.31m,

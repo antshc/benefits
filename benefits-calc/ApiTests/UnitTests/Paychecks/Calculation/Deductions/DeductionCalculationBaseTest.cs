@@ -32,7 +32,7 @@ public abstract class DeductionCalculationBaseTest
         DateTimeProviderMock.Setup(d => d.Now).Returns(Today);
         PaycheckCalculator = new PaycheckCalculator(new List<IDeductionPolicy>()
         {
-            new DependentAdditionalCostPerMonthForBenefitsDeductionPolicy(),
+            new AdditionalCostPerDependentForBenefitsDeductionPolicy(),
             new BaseCostForBenefitsDeductionPolicy(),
             new DependentAgeOverThresholdDeductionPolicy(DateTimeProviderMock.Object),
             new SalaryThresholdDeductionPolicy()

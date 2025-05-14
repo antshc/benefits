@@ -41,7 +41,7 @@ internal class PaycheckMapper : IPaycheckMapper
     {
         return type switch
         {
-            nameof(DependentAdditionalCostPerMonthForBenefitsDeductionPolicy) => "Dependent Benefit Cost",
+            nameof(AdditionalCostPerDependentForBenefitsDeductionPolicy) => "Dependent Benefit Cost",
             nameof(BaseCostForBenefitsDeductionPolicy) => "Employee Base Benefit Cost",
             nameof(DependentAgeOverThresholdDeductionPolicy) => "Additional Cost for Dependent Age 50+",
             nameof(SalaryThresholdDeductionPolicy) => "High-Income Surcharge (Over $80K)",

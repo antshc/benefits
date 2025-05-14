@@ -36,7 +36,7 @@ public class DependentAgeOverThresholdCalculationTest : DeductionCalculationBase
 
         // Assert
         actual.AssertDeductionAmount("BaseCostForBenefitsDeductionPolicy",  461.54m);
-        actual.AssertDeductionAmount("AdditionalCostPerDependentDeductionPolicy",  276.92m);
+        actual.AssertDeductionAmount("AdditionalCostPerDependentForBenefitsDeductionPolicy",  276.92m);
         actual.AssertDeductionAmount("DependentAgeOverThresholdDeductionPolicy", 92.31m);
         actual.AssertPaycheck(
             grossAmount: 3076.92m,
@@ -56,7 +56,7 @@ public class DependentAgeOverThresholdCalculationTest : DeductionCalculationBase
 
         // Assert
         actual.AssertDeductionAmount("BaseCostForBenefitsDeductionPolicy",  461.54m);
-        actual.AssertDeductionAmount("AdditionalCostPerDependentDeductionPolicy",  276.92m);
+        actual.AssertDeductionAmount("AdditionalCostPerDependentForBenefitsDeductionPolicy",  276.92m);
         actual.AssertDeductionAmount("DependentAgeOverThresholdDeductionPolicy", 92.31m);
         actual.AssertPaycheck(
             grossAmount: 3076.92m,
@@ -76,7 +76,7 @@ public class DependentAgeOverThresholdCalculationTest : DeductionCalculationBase
 
         // Assert
         actual.AssertDeductionAmount("BaseCostForBenefitsDeductionPolicy",  461.54m);
-        actual.AssertDeductionAmount("AdditionalCostPerDependentDeductionPolicy",  276.92m);
+        actual.AssertDeductionAmount("AdditionalCostPerDependentForBenefitsDeductionPolicy",  276.92m);
         actual.AssertDeductionAmount("DependentAgeOverThresholdDeductionPolicy", 0.00m);
         actual.AssertPaycheck(
             grossAmount: 3076.92m,

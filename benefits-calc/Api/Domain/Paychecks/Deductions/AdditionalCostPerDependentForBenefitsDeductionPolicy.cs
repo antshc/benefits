@@ -2,7 +2,7 @@ using Api.Domain.Employees;
 
 namespace Api.Domain.Paychecks.Deductions;
 
-public class DependentAdditionalCostPerMonthForBenefitsDeductionPolicy : IDeductionPolicy
+public class AdditionalCostPerDependentForBenefitsDeductionPolicy : IDeductionPolicy
 {
     private const int MonthsPerYear = 12;
     private const decimal DependentMonthlyCost = 600m;
@@ -18,6 +18,6 @@ public class DependentAdditionalCostPerMonthForBenefitsDeductionPolicy : IDeduct
 
         var annualCost = dependentsCost * MonthsPerYear;
 
-        return new DeductionLine(nameof(DependentAdditionalCostPerMonthForBenefitsDeductionPolicy), annualCost);
+        return new DeductionLine(nameof(AdditionalCostPerDependentForBenefitsDeductionPolicy), annualCost);
     }
 }
