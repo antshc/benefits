@@ -123,10 +123,15 @@
           <mxGeometry x="1" relative="1" as="geometry" />
         </mxCell>
         <object placeholders="1" c4Type="Relationship" c4Technology="JSON/HTTP" c4Description="Get all employees" label="&lt;div style=&quot;text-align: left&quot;&gt;&lt;div style=&quot;text-align: center&quot;&gt;&lt;b&gt;%c4Description%&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;text-align: center&quot;&gt;[%c4Technology%]&lt;/div&gt;&lt;/div&gt;" id="3GsjgfKxnPfFlwbvxOJt-2">
-          <mxCell style="endArrow=blockThin;html=1;fontSize=10;fontColor=#404040;strokeWidth=1;endFill=1;strokeColor=#828282;elbow=vertical;metaEdit=1;endSize=14;startSize=14;jumpStyle=arc;jumpSize=16;rounded=0;edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="eVmNpNEq3VE6d2gAlLow-8" target="eVmNpNEq3VE6d2gAlLow-9">
-            <mxGeometry width="240" relative="1" as="geometry">
+          <mxCell style="endArrow=blockThin;html=1;fontSize=10;fontColor=#404040;strokeWidth=1;endFill=1;strokeColor=#828282;elbow=vertical;metaEdit=1;endSize=14;startSize=14;jumpStyle=arc;jumpSize=16;rounded=0;edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;entryPerimeter=0;curved=1;" edge="1" parent="1" source="eVmNpNEq3VE6d2gAlLow-8" target="eVmNpNEq3VE6d2gAlLow-9">
+            <mxGeometry x="0.0018" width="240" relative="1" as="geometry">
               <mxPoint x="-60" y="910" as="sourcePoint" />
               <mxPoint x="180" y="910" as="targetPoint" />
+              <Array as="points">
+                <mxPoint x="-60" y="720" />
+                <mxPoint x="320" y="720" />
+              </Array>
+              <mxPoint as="offset" />
             </mxGeometry>
           </mxCell>
         </object>
@@ -139,10 +144,16 @@
           </mxCell>
         </object>
         <object placeholders="1" c4Type="Relationship" c4Technology="JSON/HTTP" c4Description="Get employee by Id" label="&lt;div style=&quot;text-align: left&quot;&gt;&lt;div style=&quot;text-align: center&quot;&gt;&lt;b&gt;%c4Description%&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;text-align: center&quot;&gt;[%c4Technology%]&lt;/div&gt;&lt;/div&gt;" id="3GsjgfKxnPfFlwbvxOJt-4">
-          <mxCell style="endArrow=blockThin;html=1;fontSize=10;fontColor=#404040;strokeWidth=1;endFill=1;strokeColor=#828282;elbow=vertical;metaEdit=1;endSize=14;startSize=14;jumpStyle=arc;jumpSize=16;rounded=0;edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" target="eVmNpNEq3VE6d2gAlLow-9">
-            <mxGeometry width="240" relative="1" as="geometry">
+          <mxCell style="endArrow=blockThin;html=1;fontSize=10;fontColor=#404040;strokeWidth=1;endFill=1;strokeColor=#828282;elbow=vertical;metaEdit=1;endSize=14;startSize=14;jumpStyle=arc;jumpSize=16;rounded=0;edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;curved=1;" edge="1" parent="1" target="eVmNpNEq3VE6d2gAlLow-9">
+            <mxGeometry x="-0.0633" width="240" relative="1" as="geometry">
               <mxPoint x="-60.53" y="825" as="sourcePoint" />
               <mxPoint x="184.47" y="835" as="targetPoint" />
+              <Array as="points">
+                <mxPoint x="-60" y="780" />
+                <mxPoint x="250" y="780" />
+                <mxPoint x="250" y="820" />
+              </Array>
+              <mxPoint as="offset" />
             </mxGeometry>
           </mxCell>
         </object>
@@ -164,10 +175,8 @@
               <mxPoint x="-100" y="890" as="sourcePoint" />
               <mxPoint x="450" y="890" as="targetPoint" />
               <Array as="points">
-                <mxPoint x="-140" y="880" />
-                <mxPoint x="-140" y="980" />
-                <mxPoint x="450" y="980" />
-                <mxPoint x="450" y="880" />
+                <mxPoint x="-160" y="980" />
+                <mxPoint x="500" y="980" />
               </Array>
             </mxGeometry>
           </mxCell>
