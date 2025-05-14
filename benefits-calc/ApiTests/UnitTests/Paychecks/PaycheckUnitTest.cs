@@ -12,20 +12,20 @@ public class PaycheckUnitTest
     public void ArgumentExceptionIsThrownIfGrossAmountIsNegative()
     {
         Assert.Throws<ArgumentException>(() =>
-            new Paycheck(-1m, PayPeriodType.BiWeekly, Enumerable.Empty<DeductionLine>(), 123));
+            new Paycheck(-1m, new PaycheckPeriod(PayPeriodType.BiWeekly) , Enumerable.Empty<DeductionLine>().ToList(), 123));
     }
 
     [Fact]
     public void GrossAmountIsDividedByPeriodType()
     {
-        var paycheck = new Paycheck(52000m, PayPeriodType.BiWeekly, Enumerable.Empty<DeductionLine>(), 123);
+        var paycheck = new Paycheck(52000m, new PaycheckPeriod(PayPeriodType.BiWeekly), Enumerable.Empty<DeductionLine>().ToList(), 123);
         Assert.Equal(2000m, paycheck.GrossAmount);
     }
 
     [Fact]
     public void BuildsWithoutDeductionsProperly()
     {
-        var paycheck = new Paycheck(26000m, PayPeriodType.BiWeekly, new List<DeductionLine>(), 999);
+        var paycheck = new Paycheck(26000m, new PaycheckPeriod(PayPeriodType.BiWeekly), new List<DeductionLine>(), 999);
         Assert.Empty(paycheck.DeductionBreakdown);
     }
 }

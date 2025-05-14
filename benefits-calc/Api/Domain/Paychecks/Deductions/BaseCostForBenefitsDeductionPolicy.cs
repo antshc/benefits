@@ -7,7 +7,7 @@ public class BaseCostForBenefitsDeductionPolicy : IDeductionPolicy
     private const int MonthsPerYear = 12;
     private const decimal BaseCostPerMonth = 1000m;
 
-    public DeductionLine Calculate(Employee employee, PaycheckPeriod paycheckPeriod)
+    public DeductionLine Calculate(Employee employee)
     {
         var annualCost = BaseCostPerMonth * MonthsPerYear;
         return new DeductionLine(nameof(BaseCostForBenefitsDeductionPolicy), annualCost);

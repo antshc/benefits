@@ -19,21 +19,32 @@ public class Paycheck
     private List<DeductionLine> _deductionBreakdown = new();
     public IReadOnlyCollection<DeductionLine> DeductionBreakdown => _deductionBreakdown.AsReadOnly();
 
-    public Paycheck(decimal grossAmount, PayPeriodType payPeriodType, IEnumerable<DeductionLine> deductions, int employeeId)
+    public Paycheck(decimal grossSalary, PaycheckPeriod paycheckPeriod, IReadOnlyCollection<DeductionLine> annualDeductions, int employeeId)
     {
-        if (grossAmount < 0)
+        if (annualDeductions == null)
+            throw new ArgumentNullException(nameof(annualDeductions));
+        if (grossSalary < 0)
             throw new ArgumentException("Gross salary cannot be negative.");
-        GrossAmount = grossAmount;
-        PayPeriod = payPeriodType;
-        EmployeeId = employeeId;
 
-        foreach (var deduction in deductions)
-        {
-            _deductionBreakdown.Add(deduction);
-        }
+        decimal grossAmount = grossSalary / paycheckPeriod.PaymentsPerYear;
+        _deductionBreakdown = GetDeductionBreakdown(annualDeductions, paycheckPeriod.PaymentsPerYear);
+
+        GrossAmount = RoundToTwoDecimalPlaces(grossAmount);
+        PayPeriod = paycheckPeriod.Type;
+        EmployeeId = employeeId;
 
         TotalDeductions = _deductionBreakdown.Sum(d => d.Amount);
         decimal netAmount = GrossAmount - TotalDeductions;
         NetAmount = netAmount < 0 ? 0 : netAmount;
+    }
+
+    private static List<DeductionLine> GetDeductionBreakdown(IReadOnlyCollection<DeductionLine> annualDeductions, short periodsPerYear)
+    {
+        return annualDeductions.Select(d => new DeductionLine(d.Type, RoundToTwoDecimalPlaces(d.Amount / periodsPerYear))).ToList();
+    }
+
+    private static decimal RoundToTwoDecimalPlaces(decimal value)
+    {
+        return decimal.Round(value, 2, MidpointRounding.AwayFromZero);
     }
 }

@@ -7,11 +7,11 @@ public class AdditionalCostPerDependentForBenefitsDeductionPolicy : IDeductionPo
     private const int MonthsPerYear = 12;
     private const decimal DependentMonthlyCost = 600m;
 
-    public DeductionLine Calculate(Employee employee, PaycheckPeriod period)
+    public DeductionLine Calculate(Employee employee)
     {
         decimal dependentsCost = 0;
 
-        foreach (var dependent in employee.GetDependents())
+        foreach (var dependent in employee.Dependents)
         {
             dependentsCost += DependentMonthlyCost;
         }

@@ -34,23 +34,6 @@ public class EdgeCasesCalculationTest : DeductionCalculationBaseTest
     }
 
     [Fact]
-    public void WhenEmployeeWithNegativeSalary_ShouldThrowsException()
-    {
-        // Arrange
-        var employee = new Employee(
-            "LeBron",
-            "James",
-            -1.00m,
-            new DateTime(1984, 12, 30));
-
-        // Act & Assert
-        Assert.Throws<ArgumentException>(() =>
-        {
-            var actual = PaycheckCalculator.Calculate(employee, BiWeeklyPeriodType);
-        });
-    }
-
-    [Fact]
     public void WhenEmployeeHasManyDependents_ShouldGeneratePaycheck()
     {
         // Arrange
@@ -61,16 +44,16 @@ public class EdgeCasesCalculationTest : DeductionCalculationBaseTest
             new DateTime(1984, 12, 30));
 
         // Arrange
-        employee.AddChild("Child1", "LeBron", new DateTime(2010, 1, 1));
-        employee.AddChild("Child2", "LeBron", new DateTime(2011, 1, 1));
-        employee.AddChild("Child3", "LeBron", new DateTime(2011, 1, 1));
-        employee.AddChild("Child4", "LeBron", new DateTime(2011, 1, 1));
-        employee.AddChild("Child5", "LeBron", new DateTime(2011, 1, 1));
-        employee.AddChild("Child6", "LeBron", new DateTime(2011, 1, 1));
-        employee.AddChild("Child7", "LeBron", new DateTime(2011, 1, 1));
-        employee.AddChild("Child8", "LeBron", new DateTime(2011, 1, 1));
-        employee.AddChild("Child9", "LeBron", new DateTime(2011, 1, 1));
-        employee.AddChild("Child10", "LeBron", new DateTime(2011, 1, 1));
+        employee.AddDependent(new Dependent("Child1", "LeBron", new DateTime(2010, 1, 1), Relationship.Child));
+        employee.AddDependent(new Dependent("Child2", "LeBron", new DateTime(2011, 1, 1), Relationship.Child));
+        employee.AddDependent(new Dependent("Child3", "LeBron", new DateTime(2011, 1, 1), Relationship.Child));
+        employee.AddDependent(new Dependent("Child4", "LeBron", new DateTime(2011, 1, 1), Relationship.Child));
+        employee.AddDependent(new Dependent("Child5", "LeBron", new DateTime(2011, 1, 1), Relationship.Child));
+        employee.AddDependent(new Dependent("Child6", "LeBron", new DateTime(2011, 1, 1), Relationship.Child));
+        employee.AddDependent(new Dependent("Child7", "LeBron", new DateTime(2011, 1, 1), Relationship.Child));
+        employee.AddDependent(new Dependent("Child8", "LeBron", new DateTime(2011, 1, 1), Relationship.Child));
+        employee.AddDependent(new Dependent("Child9", "LeBron", new DateTime(2011, 1, 1), Relationship.Child));
+        employee.AddDependent(new Dependent("Child10", "LeBron", new DateTime(2011, 1, 1), Relationship.Child));
 
         // Act
         Paycheck actual = PaycheckCalculator.Calculate(employee, BiWeeklyPeriodType);

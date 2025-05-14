@@ -12,7 +12,6 @@ public class Employee : Entity, IAggregateRoot
     public DateTime DateOfBirth { get; private set; }
     private readonly List<Dependent> _dependents;
     public IReadOnlyCollection<Dependent> Dependents => _dependents.AsReadOnly();
-    public Dependent? SpouseOrDomesticPartner => Dependents.SingleOrDefault(d => d.IsSpouseOrDomesticPartner());
 
     // EF Core requires a parameterless constructor
     private Employee()
@@ -22,6 +21,13 @@ public class Employee : Entity, IAggregateRoot
 
     public Employee(string firstName, string lastName, decimal salary, DateTime dateOfBirth, IEnumerable<Dependent> dependents = null)
     {
+        if (string.IsNullOrWhiteSpace(firstName))
+            throw new ArgumentException("First name cannot be null or empty.", nameof(firstName));
+        if (string.IsNullOrWhiteSpace(lastName))
+            throw new ArgumentException("Last name cannot be null or empty.", nameof(lastName));
+        if (salary < 0)
+            throw new ApplicationException("Salary cannot be negative.");
+
         FirstName = firstName;
         LastName = lastName;
         Salary = salary;
@@ -29,30 +35,13 @@ public class Employee : Entity, IAggregateRoot
         _dependents = dependents?.ToList() ?? new List<Dependent>();
     }
 
-    public IReadOnlyCollection<Dependent> GetDependents()
+    // why? The dependent may be easy added from the API POST /employees/{id}/dependents
+    // if we need a Child or Spouse we can try to use polymorphic behavior
+    public void AddDependent(Dependent dependent)
     {
-        return Dependents;
-    }
+        dependent.SetEmployeeId(Id);
+        CheckRule(new SingleSpouseOrDomesticPartnerRule(Dependents, dependent));
 
-    public void AddChild(string firstName, string lastName, DateTime dateOfBirth)
-    {
-        AddDependent(firstName, lastName, dateOfBirth, Relationship.Child);
-    }
-
-    public void AddSpouse(string firstName, string lastName, DateTime dateOfBirth)
-    {
-        CheckRule(new SingleSpouseOrDomesticPartnerRule(Dependents));
-        AddDependent(firstName, lastName, dateOfBirth, Relationship.Spouse);
-    }
-
-    public void AddDomesticPartner(string firstName, string lastName, DateTime dateOfBirth)
-    {
-        CheckRule(new SingleSpouseOrDomesticPartnerRule(Dependents));
-        AddDependent(firstName, lastName, dateOfBirth, Relationship.DomesticPartner);
-    }
-
-    public void AddDependent(string firstName, string lastName, DateTime dateOfBirth, Relationship relationship)
-    {
-        _dependents.Add(new Dependent(firstName, lastName, dateOfBirth, relationship, Id));
+        _dependents.Add(dependent);
     }
 }

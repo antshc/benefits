@@ -17,33 +17,19 @@ public class PaycheckCalculator : IPaycheckCalculator
 
     public Paycheck Calculate(Employee employee, PaycheckPeriod period)
     {
-        var annualDeductions = CalculateAnnualDeductions(employee, period);
-        short periodsPerYear = (short)period.Type;
-
-        List<DeductionLine> perPeriodDeductions = CalculatePerPeriodDeductions(annualDeductions, periodsPerYear);
-
-        var grossAmount = RoundToTwoDecimalPlaces(employee.Salary / periodsPerYear);
+        var annualDeductions = CalculateAnnualDeductions(employee);
+      
         return new Paycheck(
-            grossAmount,
-            period.Type,
-            perPeriodDeductions,
+            employee.Salary,
+            period,
+            annualDeductions,
             employee.Id
         );
     }
 
-    private static List<DeductionLine> CalculatePerPeriodDeductions(IReadOnlyCollection<DeductionLine> annualDeductions, short periodsPerYear)
+    private IReadOnlyCollection<DeductionLine> CalculateAnnualDeductions(Employee employee)
     {
-        return annualDeductions.Select(d => new DeductionLine(d.Type, RoundToTwoDecimalPlaces(d.Amount / periodsPerYear))).ToList();
-    }
-
-    private IReadOnlyCollection<DeductionLine> CalculateAnnualDeductions(Employee employee, PaycheckPeriod period)
-    {
-        List<DeductionLine> annualDeductions = _policies.Select(p => p.Calculate(employee, period)).ToList();
+        List<DeductionLine> annualDeductions = _policies.Select(p => p.Calculate(employee)).ToList();
         return annualDeductions;
-    }
-    
-    private static decimal RoundToTwoDecimalPlaces(decimal value)
-    {
-        return decimal.Round(value, 2, MidpointRounding.AwayFromZero);
     }
 }

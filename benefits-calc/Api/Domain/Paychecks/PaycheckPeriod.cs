@@ -5,9 +5,9 @@ public class PaycheckPeriod
     public PaycheckPeriod(PayPeriodType type)
     {
         Type = type;
-        PeriodPerYear = (short)type;
+        PaymentsPerYear = (short)type;
     }
 
-    public short PeriodPerYear { get; }
+    public short PaymentsPerYear { get; }
     public PayPeriodType Type { get; }
 }

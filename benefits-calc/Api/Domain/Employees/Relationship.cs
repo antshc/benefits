@@ -2,7 +2,7 @@ namespace Api.Domain.Employees;
 
 public enum Relationship
 {
-    None,
+    None = 0,
     Spouse,
     DomesticPartner,
     Child

@@ -29,14 +29,14 @@ public class DependentAgeOverThresholdCalculationTest : DeductionCalculationBase
     public void WhenEmployeeHasSpouseOverAgeThreshold_ShouldDeductCalculatedAmount()
     {
         // Arrange
-        TestEmployee.AddSpouse("Spouse", "LeBron", Today.AddYears(-AgeThresholdInYears));
+        TestEmployee.AddDependent(new Dependent("Spouse", "LeBron", Today.AddYears(-AgeThresholdInYears), Relationship.Spouse));
 
         // Act
         var actual = PaycheckCalculator.Calculate(TestEmployee, BiWeeklyPeriodType);
 
         // Assert
-        actual.AssertDeductionAmount("BaseCostForBenefitsDeductionPolicy",  461.54m);
-        actual.AssertDeductionAmount("AdditionalCostPerDependentForBenefitsDeductionPolicy",  276.92m);
+        actual.AssertDeductionAmount("BaseCostForBenefitsDeductionPolicy", 461.54m);
+        actual.AssertDeductionAmount("AdditionalCostPerDependentForBenefitsDeductionPolicy", 276.92m);
         actual.AssertDeductionAmount("DependentAgeOverThresholdDeductionPolicy", 92.31m);
         actual.AssertPaycheck(
             grossAmount: 3076.92m,
@@ -49,14 +49,14 @@ public class DependentAgeOverThresholdCalculationTest : DeductionCalculationBase
     public void WhenEmployeeHasDomesticPartnerOverAgeThreshold_ShouldDeductCalculatedAmount()
     {
         // Arrange
-        TestEmployee.AddDomesticPartner("DomesticPartner", "LeBron", Today.AddYears(-AgeThresholdInYears));
+        TestEmployee.AddDependent(new Dependent("DomesticPartner", "LeBron", Today.AddYears(-AgeThresholdInYears), Relationship.DomesticPartner));
 
         // Act
         var actual = PaycheckCalculator.Calculate(TestEmployee, BiWeeklyPeriodType);
 
         // Assert
-        actual.AssertDeductionAmount("BaseCostForBenefitsDeductionPolicy",  461.54m);
-        actual.AssertDeductionAmount("AdditionalCostPerDependentForBenefitsDeductionPolicy",  276.92m);
+        actual.AssertDeductionAmount("BaseCostForBenefitsDeductionPolicy", 461.54m);
+        actual.AssertDeductionAmount("AdditionalCostPerDependentForBenefitsDeductionPolicy", 276.92m);
         actual.AssertDeductionAmount("DependentAgeOverThresholdDeductionPolicy", 92.31m);
         actual.AssertPaycheck(
             grossAmount: 3076.92m,
@@ -69,14 +69,14 @@ public class DependentAgeOverThresholdCalculationTest : DeductionCalculationBase
     public void WhenEmployeeHasChildUnderAgeThreshold_ShouldNotDeductAgeOverThresholdAmount()
     {
         // Arrange
-        TestEmployee.AddChild("Child1", "LeBron", Today.AddYears(-20));
+        TestEmployee.AddDependent(new Dependent("Child1", "LeBron", Today.AddYears(-20), Relationship.Child));
 
         // Act
         var actual = PaycheckCalculator.Calculate(TestEmployee, BiWeeklyPeriodType);
 
         // Assert
-        actual.AssertDeductionAmount("BaseCostForBenefitsDeductionPolicy",  461.54m);
-        actual.AssertDeductionAmount("AdditionalCostPerDependentForBenefitsDeductionPolicy",  276.92m);
+        actual.AssertDeductionAmount("BaseCostForBenefitsDeductionPolicy", 461.54m);
+        actual.AssertDeductionAmount("AdditionalCostPerDependentForBenefitsDeductionPolicy", 276.92m);
         actual.AssertDeductionAmount("DependentAgeOverThresholdDeductionPolicy", 0.00m);
         actual.AssertPaycheck(
             grossAmount: 3076.92m,

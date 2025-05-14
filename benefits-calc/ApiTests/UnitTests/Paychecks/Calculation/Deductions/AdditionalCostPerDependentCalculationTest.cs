@@ -20,7 +20,7 @@ public class AdditionalCostPerDependentCalculationTest : DeductionCalculationBas
         Paycheck actual = PaycheckCalculator.Calculate(TestEmployee, BiWeeklyPeriodType);
 
         // Assert
-        actual.AssertDeductionAmount("BaseCostForBenefitsDeductionPolicy",  461.54m);
+        actual.AssertDeductionAmount("BaseCostForBenefitsDeductionPolicy", 461.54m);
         actual.AssertDeductionAmount("AdditionalCostPerDependentForBenefitsDeductionPolicy", 0.00m);
         actual.AssertPaycheck(
             grossAmount: 3000.00m,
@@ -33,13 +33,13 @@ public class AdditionalCostPerDependentCalculationTest : DeductionCalculationBas
     public void WhenEmployeeWithOneChild_ShouldDeductCorrectly()
     {
         // Arrange
-        TestEmployee.AddChild("ChildA", "LeBron", new DateTime(2015, 5, 5));
+        TestEmployee.AddDependent(new Dependent("ChildA", "LeBron", new DateTime(2015, 5, 5), Relationship.Child));
 
         // Act
         Paycheck actual = PaycheckCalculator.Calculate(TestEmployee, BiWeeklyPeriodType);
 
         // Assert
-        actual.AssertDeductionAmount("BaseCostForBenefitsDeductionPolicy",  461.54m);
+        actual.AssertDeductionAmount("BaseCostForBenefitsDeductionPolicy", 461.54m);
         actual.AssertDeductionAmount("AdditionalCostPerDependentForBenefitsDeductionPolicy", 276.92m);
         actual.AssertPaycheck(
             grossAmount: 3000.00m,
@@ -52,14 +52,14 @@ public class AdditionalCostPerDependentCalculationTest : DeductionCalculationBas
     public void EmployeeWithMultipleChildren_ShouldDeductCorrectly()
     {
         // Arrange
-        TestEmployee.AddChild("Child1", "LeBron", new DateTime(2010, 1, 1));
-        TestEmployee.AddChild("Child2", "LeBron", new DateTime(2011, 1, 1));
+        TestEmployee.AddDependent(new Dependent("Child1", "LeBron", new DateTime(2010, 1, 1), Relationship.Child));
+        TestEmployee.AddDependent(new Dependent("Child2", "LeBron", new DateTime(2011, 1, 1), Relationship.Child));
 
         // Act
         Paycheck actual = PaycheckCalculator.Calculate(TestEmployee, BiWeeklyPeriodType);
 
         // Assert
-        actual.AssertDeductionAmount("BaseCostForBenefitsDeductionPolicy",  461.54m);
+        actual.AssertDeductionAmount("BaseCostForBenefitsDeductionPolicy", 461.54m);
         actual.AssertDeductionAmount("AdditionalCostPerDependentForBenefitsDeductionPolicy", 553.85m);
         actual.AssertPaycheck(
             grossAmount: 3000.00m,
@@ -72,15 +72,15 @@ public class AdditionalCostPerDependentCalculationTest : DeductionCalculationBas
     public void WhenEmployeeWithTwoChildrenAndPartner_ShouldDeductCorrectly()
     {
         // Arrange
-        TestEmployee.AddChild("Child1", "LeBron", new DateTime(2010, 1, 1));
-        TestEmployee.AddChild("Child2", "LeBron", new DateTime(2011, 1, 1));
-        TestEmployee.AddDomesticPartner("Partner", "LeBron", new DateTime(2009, 6, 15));
+        TestEmployee.AddDependent(new Dependent("Child1", "LeBron", new DateTime(2010, 1, 1), Relationship.Child));
+        TestEmployee.AddDependent(new Dependent("Child2", "LeBron", new DateTime(2011, 1, 1), Relationship.Child));
+        TestEmployee.AddDependent(new Dependent("Partner", "LeBron", new DateTime(2009, 6, 15), Relationship.DomesticPartner));
 
         // Act
         Paycheck actual = PaycheckCalculator.Calculate(TestEmployee, BiWeeklyPeriodType);
 
         // Assert
-        actual.AssertDeductionAmount("BaseCostForBenefitsDeductionPolicy",  461.54m);
+        actual.AssertDeductionAmount("BaseCostForBenefitsDeductionPolicy", 461.54m);
         actual.AssertDeductionAmount("AdditionalCostPerDependentForBenefitsDeductionPolicy", 830.77m);
         actual.AssertPaycheck(
             grossAmount: 3000.00m,
@@ -93,15 +93,15 @@ public class AdditionalCostPerDependentCalculationTest : DeductionCalculationBas
     public void WhenEmployeeWithTwoChildrenAndSpouse_ShouldDeductCorrectly()
     {
         // Arrange
-        TestEmployee.AddChild("Child1", "LeBron", new DateTime(2010, 1, 1));
-        TestEmployee.AddChild("Child2", "LeBron", new DateTime(2010, 1, 1));
-        TestEmployee.AddSpouse("Partner", "LeBron", new DateTime(2010, 1, 1));
+        TestEmployee.AddDependent(new Dependent("Child1", "LeBron", new DateTime(2010, 1, 1), Relationship.Child));
+        TestEmployee.AddDependent(new Dependent("Child2", "LeBron", new DateTime(2010, 1, 1), Relationship.Child));
+        TestEmployee.AddDependent(new Dependent("Partner", "LeBron", new DateTime(2010, 1, 1), Relationship.Spouse));
 
         // Act
         Paycheck actual = PaycheckCalculator.Calculate(TestEmployee, BiWeeklyPeriodType);
 
         // Assert
-        actual.AssertDeductionAmount("BaseCostForBenefitsDeductionPolicy",  461.54m);
+        actual.AssertDeductionAmount("BaseCostForBenefitsDeductionPolicy", 461.54m);
         actual.AssertDeductionAmount("AdditionalCostPerDependentForBenefitsDeductionPolicy", 830.77m);
         actual.AssertPaycheck(
             grossAmount: 3000.00m,

@@ -93,10 +93,11 @@ public static class DatabaseInitializer
                     foreach (var dependent in dto.Dependents)
                     {
                         employee.AddDependent(
-                            dependent.FirstName,
-                            dependent.LastName,
-                            dependent.DateOfBirth,
-                            dependent.Relationship);
+                            new Dependent(
+                                dependent.FirstName,
+                                dependent.LastName,
+                                dependent.DateOfBirth,
+                                dependent.Relationship));
                     }
                 }
 
