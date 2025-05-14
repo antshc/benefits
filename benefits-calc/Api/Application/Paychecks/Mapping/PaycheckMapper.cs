@@ -14,8 +14,8 @@ internal class PaycheckMapper : IPaycheckMapper
             GrossAmount = paycheck.GrossAmount,
             TotalDeductions = paycheck.TotalDeductions,
             NetAmount = paycheck.NetAmount,
-            PayPeriodType = paycheck.PayPeriod,
-            PayPeriodTypeFriendlyName = ToFriendlyName(paycheck.PayPeriod),
+            PayPeriodType = paycheck.PayPeriod.Type,
+            PayPeriodTypeFriendlyName = ToFriendlyName(paycheck.PayPeriod.Type),
             EmployeeId = paycheck.EmployeeId,
             DeductionBreakdown = paycheck.DeductionBreakdown
                 .Select(d => new DeductionLineDto

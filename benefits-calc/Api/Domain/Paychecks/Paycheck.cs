@@ -10,37 +10,55 @@ public class Paycheck
     // why? Decimal is more suitable for financial calculations due to its higher precision and ability to represent decimal fractions exactly, avoiding rounding errors that can occur with floating-point types like double.
     // It good to have Money Value Object. Using a Money value object ensures type safety, encapsulates monetary logic. It centralizes rounding and formatting rules.
     // In general is good to value objects for other primitive values to ensures type safety, but it requires carefull investigation what make a value object.
-    public decimal GrossAmount { get; }
-    public decimal TotalDeductions { get; }
-    public decimal NetAmount { get; }
-    public PayPeriodType PayPeriod { get; }
-    public int EmployeeId { get; }
+    public decimal GrossAmount { get; private set; }
+    public decimal TotalDeductions { get; private set; }
+    public decimal NetAmount { get; private set; }
+    public PaycheckPeriod PayPeriod { get; private set; }
+    public int EmployeeId { get; private set; }
 
     private List<DeductionLine> _deductionBreakdown = new();
     public IReadOnlyCollection<DeductionLine> DeductionBreakdown => _deductionBreakdown.AsReadOnly();
 
-    public Paycheck(decimal grossSalary, PaycheckPeriod paycheckPeriod, IReadOnlyCollection<DeductionLine> annualDeductions, int employeeId)
+    public Paycheck(decimal grossSalary, PaycheckPeriod payPeriod, IReadOnlyCollection<DeductionLine> annualDeductions, int employeeId)
     {
         if (annualDeductions == null)
             throw new ArgumentNullException(nameof(annualDeductions));
         if (grossSalary < 0)
             throw new ArgumentException("Gross salary cannot be negative.");
 
-        decimal grossAmount = grossSalary / paycheckPeriod.PaymentsPerYear;
-        _deductionBreakdown = GetDeductionBreakdown(annualDeductions, paycheckPeriod.PaymentsPerYear);
+        ApplyDeductionBreakdown(annualDeductions, payPeriod.PaymentsPerYear);
 
-        GrossAmount = RoundToTwoDecimalPlaces(grossAmount);
-        PayPeriod = paycheckPeriod.Type;
+        GrossAmount = CalculateGrossAmount(grossSalary, payPeriod.PaymentsPerYear);
+        PayPeriod = payPeriod;
         EmployeeId = employeeId;
 
-        TotalDeductions = _deductionBreakdown.Sum(d => d.Amount);
-        decimal netAmount = GrossAmount - TotalDeductions;
-        NetAmount = netAmount < 0 ? 0 : netAmount;
+        TotalDeductions = DeductionBreakdown.Sum(d => d.Amount);
+        SetNetAmount(CalculateNetAmount());
     }
 
-    private static List<DeductionLine> GetDeductionBreakdown(IReadOnlyCollection<DeductionLine> annualDeductions, short periodsPerYear)
+    private void ApplyDeductionBreakdown(IReadOnlyCollection<DeductionLine> annualDeductions, short periodsPerYear)
     {
-        return annualDeductions.Select(d => new DeductionLine(d.Type, RoundToTwoDecimalPlaces(d.Amount / periodsPerYear))).ToList();
+        _deductionBreakdown = annualDeductions
+            .Select(d => new DeductionLine(d.Type, RoundToTwoDecimalPlaces(d.Amount / periodsPerYear)))
+            .ToList();
+    }
+
+    private decimal CalculateGrossAmount(decimal grossSalary, short periodsPerYear)
+    {
+        return RoundToTwoDecimalPlaces(grossSalary / periodsPerYear);
+    }
+
+    private decimal CalculateNetAmount()
+    {
+        return GrossAmount - TotalDeductions;
+    }
+
+    private void SetNetAmount(decimal netAmount)
+    {
+        if (netAmount > 0)
+        {
+            NetAmount = netAmount;
+        }
     }
 
     private static decimal RoundToTwoDecimalPlaces(decimal value)
