@@ -80,7 +80,13 @@ three tiers, making the solution a conversation starter to show your abilities a
 4. Build and run the project ⚙️
 5. Use the API by Swagger or run integration tests 🧪
 
-# Documentation
+## Manage migrations
+```bash
+dotnet tool install --global dotnet-ef
+dotnet ef migrations add InitialMigration --project Api --startup-project Api -o Data/Migrations
+dotnet ef migrations remove --project Api --startup-project Api
+```
+# System overview
 # Introduction and Goals
 
 This system is designed to manage employee payroll and benefit deductions using a biweekly pay cycle, where employees receive 26 paychecks per year. The platform supports viewing employees and their dependents, and accurately calculates net
