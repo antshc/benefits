@@ -116,7 +116,7 @@ paycheck amounts by applying predefined deduction policies.
 **Need clarification:**
 - Should dependents over 50 years exclusively apply to grandparents for benefits adjustment?
 
-### Non Functional Requirements/Quality Goals:
+### Non Functional Requirements:
 
 - **Accuracy**  
   Ensure precise calculation of paychecks and benefit deductions, adhering strictly to the defined business rules.
