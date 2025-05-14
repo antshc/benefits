@@ -49,7 +49,7 @@ public class AdditionalCostPerDependentCalculationTest : DeductionCalculationBas
     }
 
     [Fact]
-    public void EmployeeWithMultipleChildren_ShouldDeductCorrectly()
+    public void WhenEmployeeWithMultipleChildren_ShouldDeductCorrectly()
     {
         // Arrange
         TestEmployee.AddDependent(new Dependent("Child1", "LeBron", new DateTime(2010, 1, 1), Relationship.Child));
