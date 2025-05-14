@@ -9,18 +9,22 @@ namespace ApiTests.UnitTests.Paychecks;
 
 public class PaycheckUnitTest
 {
-    [Fact]
-    public void WhenValidPaycheckIsCreated_CalculatesCorrectAmounts()
+    [Theory]
+    [InlineData(1000, PayPeriodType.Monthly, 1, new object[] { "Tax", 120, "Insurance", 50 })]
+    [InlineData(2000, PayPeriodType.BiWeekly, 2, new object[] { "Tax", 200 })]
+    public void WhenValidPaycheckIsCreated_CalculatesCorrectAmounts(
+        decimal grossSalary,
+        PayPeriodType payPeriodType,
+        int employeeId,
+        object[] deductionData)
     {
         // Arrange
-        decimal grossSalary = 1000m;
-        var payPeriod = new PaycheckPeriod(PayPeriodType.Monthly);
-        var annualDeductions = new List<DeductionLine>
+        var payPeriod = new PaycheckPeriod(payPeriodType);
+        var annualDeductions = new List<DeductionLine>();
+        for (int i = 0; i < deductionData.Length; i += 2)
         {
-            new DeductionLine("Tax", 120m),
-            new DeductionLine("Insurance", 50m)
-        };
-        int employeeId = 1;
+            annualDeductions.Add(new DeductionLine((string)deductionData[i], Convert.ToDecimal(deductionData[i + 1])));
+        }
 
         // Act
         var paycheck = new Paycheck(grossSalary, payPeriod, annualDeductions, employeeId);
@@ -63,16 +67,6 @@ public class PaycheckUnitTest
         var paycheck = new Paycheck(grossSalary, payPeriod, annualDeductions, 1);
 
         paycheck.AssertPaycheck(grossSalary, annualDeductions, payPeriod, 1);
-    }
-
-    [Fact]
-    public void WhenPayPeriodIsBiWeekly_ThenGrossAmountCalculatedCorrectly()
-    {
-        decimal annualSalary = 52000m;
-        var payPeriod = new PaycheckPeriod(PayPeriodType.BiWeekly);
-        int employeeId = 123;
-        var paycheck = new Paycheck(annualSalary, payPeriod, new List<DeductionLine>(), employeeId);
-        paycheck.AssertPaycheck(annualSalary, new List<DeductionLine>(), payPeriod, employeeId);
     }
 
     [Fact]
