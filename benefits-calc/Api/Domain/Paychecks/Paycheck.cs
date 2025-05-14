@@ -19,16 +19,16 @@ public class Paycheck
     private List<DeductionLine> _deductionBreakdown = new();
     public IReadOnlyCollection<DeductionLine> DeductionBreakdown => _deductionBreakdown.AsReadOnly();
 
-    public Paycheck(decimal grossSalary, PaycheckPeriod payPeriod, IReadOnlyCollection<DeductionLine> annualDeductions, int employeeId)
+    public Paycheck(decimal annualGrossSalary, PaycheckPeriod payPeriod, IReadOnlyCollection<DeductionLine> annualDeductions, int employeeId)
     {
         if (annualDeductions == null)
             throw new ArgumentNullException(nameof(annualDeductions));
-        if (grossSalary < 0)
+        if (annualGrossSalary < 0)
             throw new ArgumentException("Gross salary cannot be negative.");
 
         ApplyDeductionBreakdown(annualDeductions, payPeriod.PaymentsPerYear);
 
-        GrossAmount = CalculateGrossAmount(grossSalary, payPeriod.PaymentsPerYear);
+        GrossAmount = CalculateGrossAmount(annualGrossSalary, payPeriod.PaymentsPerYear);
         PayPeriod = payPeriod;
         EmployeeId = employeeId;
 
