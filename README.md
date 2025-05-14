@@ -109,6 +109,7 @@ paycheck amounts by applying predefined deduction policies.
 
 **Assumptions:**
 - The age-based benefit adjustment for dependents over 50 applies only to the **Spouse or Domestic Partner**.
+- Prevent net pay from falling below zero. Deduction is limited to gross pay. Display deductions but show Net Pay as $0.00.
 - Paycheck amounts are **rounded to 2 decimal places**.
 - Display paycheck with breakdown of deductions.
 

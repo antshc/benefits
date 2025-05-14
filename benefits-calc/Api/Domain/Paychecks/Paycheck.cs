@@ -12,7 +12,7 @@ public class Paycheck
     // In general is good to value objects for other primitive values to ensures type safety, but it requires carefull investigation what make a value object.
     public decimal GrossAmount { get; }
     public decimal TotalDeductions { get; }
-    public decimal NetAmount => GrossAmount - TotalDeductions;
+    public decimal NetAmount { get; }
     public PayPeriodType PayPeriod { get; }
     public int EmployeeId { get; }
 
@@ -23,7 +23,7 @@ public class Paycheck
     {
         if (grossAmount < 0)
             throw new ArgumentException("Gross salary cannot be negative.");
-        GrossAmount = grossAmount ;
+        GrossAmount = grossAmount;
         PayPeriod = payPeriodType;
         EmployeeId = employeeId;
 
@@ -33,5 +33,7 @@ public class Paycheck
         }
 
         TotalDeductions = _deductionBreakdown.Sum(d => d.Amount);
+        decimal netAmount = GrossAmount - TotalDeductions;
+        NetAmount = netAmount < 0 ? 0 : netAmount;
     }
 }
