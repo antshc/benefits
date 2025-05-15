@@ -78,6 +78,41 @@ public class EmployeeIntegrationTests : IntegrationTest
                         DateOfBirth = new DateTime(1974, 1, 2)
                     }
                 }
+            },
+            new()
+            {
+                Id = 4,
+                FirstName = "Full",
+                LastName = "Morant",
+                Salary = 92365.22m,
+                DateOfBirth = new DateTime(1999, 8, 10),
+                Dependents = new List<GetDependentDto>
+                {
+                    new()
+                    {
+                        Id = 5,
+                        FirstName = "Spouse",
+                        LastName = "Morant",
+                        Relationship = Relationship.Spouse,
+                        DateOfBirth = new DateTime(1974, 3, 3)
+                    },
+                    new()
+                    {
+                        Id = 6,
+                        FirstName = "Child1",
+                        LastName = "Morant",
+                        Relationship = Relationship.Child,
+                        DateOfBirth = new DateTime(2020, 6, 23)
+                    },
+                    new()
+                    {
+                        Id = 7,
+                        FirstName = "Child2",
+                        LastName = "Morant",
+                        Relationship = Relationship.Child,
+                        DateOfBirth = new DateTime(2021, 5, 18)
+                    }
+                }
             }
         };
         await response.ShouldReturn(HttpStatusCode.OK, employees);
@@ -98,7 +133,7 @@ public class EmployeeIntegrationTests : IntegrationTest
         };
         await response.ShouldReturn(HttpStatusCode.OK, employee);
     }
-    
+
     [Fact]
     //task: make test pass
     public async Task WhenAskedForANonexistentEmployee_ShouldReturn404()
@@ -107,4 +142,3 @@ public class EmployeeIntegrationTests : IntegrationTest
         await response.ShouldReturn(HttpStatusCode.NotFound);
     }
 }
-

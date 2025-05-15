@@ -48,6 +48,30 @@ public class DependentIntegrationTests : IntegrationTest
                 LastName = "Jordan",
                 Relationship = Relationship.DomesticPartner,
                 DateOfBirth = new DateTime(1974, 1, 2)
+            },
+            new()
+            {
+                Id = 5,
+                FirstName = "Spouse",
+                LastName = "Morant",
+                Relationship = Relationship.Spouse,
+                DateOfBirth = new DateTime(1974, 3, 3)
+            },
+            new()
+            {
+                Id = 6,
+                FirstName = "Child1",
+                LastName = "Morant",
+                Relationship = Relationship.Child,
+                DateOfBirth = new DateTime(2020, 6, 23)
+            },
+            new()
+            {
+                Id = 7,
+                FirstName = "Child2",
+                LastName = "Morant",
+                Relationship = Relationship.Child,
+                DateOfBirth = new DateTime(2021, 5, 18)
             }
         };
         await response.ShouldReturn(HttpStatusCode.OK, dependents);
@@ -77,4 +101,3 @@ public class DependentIntegrationTests : IntegrationTest
         await response.ShouldReturn(HttpStatusCode.NotFound);
     }
 }
-

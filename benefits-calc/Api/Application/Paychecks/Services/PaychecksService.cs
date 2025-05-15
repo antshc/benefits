@@ -1,10 +1,8 @@
 using Api.Application.Paychecks.Mapping;
 using Api.Application.Paychecks.Payload;
-using Api.Data;
 using Api.Domain.Employees;
 using Api.Domain.Paychecks;
 using Api.Domain.Paychecks.Calculation;
-using Microsoft.EntityFrameworkCore;
 
 namespace Api.Application.Paychecks.Services;
 
@@ -14,18 +12,18 @@ internal class PaychecksService : IPaychecksService
 {
     private readonly IPaycheckCalculator _paycheckCalculator;
     private readonly IPaycheckMapper _mapper;
-    private readonly BenefitsContext _context;
+    private readonly IEmployeeRepository _employeeRepository;
 
-    public PaychecksService(IPaycheckCalculator paycheckCalculator, IPaycheckMapper mapper, BenefitsContext context)
+    public PaychecksService(IPaycheckCalculator paycheckCalculator, IPaycheckMapper mapper, IEmployeeRepository employeeRepository)
     {
         _paycheckCalculator = paycheckCalculator;
         _mapper = mapper;
-        _context = context;
+        _employeeRepository = employeeRepository;
     }
 
     public async Task<PaycheckDto> CreatePaycheck(int employeeId, short payPeriodType, CancellationToken cancellationToken)
     {
-        Employee? emp = await _context.Employees.AsNoTracking().FirstOrDefaultAsync(e => e.Id == employeeId, cancellationToken);
+        Employee? emp = await _employeeRepository.GetById(employeeId, cancellationToken);
 
         if (emp is null) throw new ApplicationException("Employee not found");
 

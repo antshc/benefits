@@ -47,6 +47,7 @@ public class EmployeeQuery : IEmployeeQuery
     public async Task<GetEmployeeDto> GetById(int id, CancellationToken cancellationToken)
     {
         Employee? emp = await _context.Employees
+            .Include(e => e.Dependents)
             .AsNoTracking()
             .FirstOrDefaultAsync(d => d.Id == id, cancellationToken);
         if (emp is null) throw new ApplicationException("Employee not found");

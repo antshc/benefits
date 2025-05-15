@@ -3,7 +3,7 @@ using Api.Application.Employees.Queries;
 using Api.Application.Paychecks.Mapping;
 using Api.Application.Paychecks.Services;
 using Api.Data;
-using Api.Domain.Paychecks;
+using Api.Domain.Employees;
 using Api.Domain.Paychecks.Calculation;
 using Api.Domain.Paychecks.Deductions;
 using Api.SharedKernel;
@@ -33,6 +33,8 @@ public static class DependencyInjection
         // why? Store Connection strings and credentials securely (e.g., secrets, config providers).
         services.AddDbContext<BenefitsContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+
+        services.AddScoped<IEmployeeRepository, EmployeeRepository>();
     }
 
     private static void ApplicationLayer(IServiceCollection services)
