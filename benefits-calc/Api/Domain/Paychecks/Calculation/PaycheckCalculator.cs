@@ -19,12 +19,7 @@ public class PaycheckCalculator : IPaycheckCalculator
     {
         var annualDeductions = CalculateAnnualDeductions(employee);
 
-        return new Paycheck(
-            employee.Salary,
-            period,
-            annualDeductions,
-            employee.Id
-        );
+        return null;
     }
 
     private IReadOnlyCollection<DeductionLine> CalculateAnnualDeductions(Employee employee)
