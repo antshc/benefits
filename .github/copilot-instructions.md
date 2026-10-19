@@ -5,7 +5,7 @@
 Single repository (`antshc/benefits`): docs and codebase live together. There is no `workspace/` split.
 
 - **Docs live at the repo root:** `GLOSSARY.md` (domain glossary) and `ARCHITECTURE.md` (system map, ADR/Concept indexes), with ADRs under `docs/adr/` and Crosscutting Concepts under `docs/concepts/`.
-- **Source code lives in `benefits-calc/`:** the .NET 6 `PaylocityBenefitsCalculator` solution (`Api/` and `ApiTests/`).
+- **Source code lives in `benefits-calc/`:** the .NET 10 `PaylocityBenefitsCalculator` solution (`Api/` and `ApiTests/`).
 
 Within this file, resolve conflicts in this order: **safety and repository targeting → authoritative sources → navigation → build and validation → documentation conventions.** This ordering scopes only the rules in this file; it does not override `AGENTS.md`, path-scoped instructions, or user instructions.
 

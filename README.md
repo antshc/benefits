@@ -66,7 +66,7 @@ three tiers, making the solution a conversation starter to show your abilities a
 
 ## Prerequisites ✔️
 
-- .NET 6+ SDK (Note: JetBrains IDE won't connect debugger to Test project with .Net6, use .Net8)
+- .NET 10 SDK
 - Docker 🐳
 
 ## Run project
